@@ -1,7 +1,5 @@
 'use strict';
 
-// tesseract
-
 const { exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -40,101 +38,62 @@ const defaultOptions = {
   oem: oems[3]
 }
 
-function checkTesseractVersion() {
-  return new Promise((resolve, reject) => {
-    exec("tesseract --version", function(err, stdout) {
-      if (err) {
-        console.log("pleace checkout yours tesseract-ORC is install && system path is right");
-        reject(err);
-        return;
-      }
-      versionInfo = stdout.toLowerCase().split(/[\r,\n]/).reduce((sum, item) => (item ? [...sum, item.trim()] : sum), []);
-      version = versionInfo[0].split(/[v,-]/)[1];
-      resolve(true);
+function checkTesseractVersion(callback) {
+  exec("tesseract --version", function(err, stdout) {
+    if (err) {
+      console.log("Please check if you have installed tesseract-ORC && Set the environment variables correctly.");
+      callback(err, null);
+      return;
+    }
+    versionInfo = stdout.toLowerCase().split(/[\r,\n]/).reduce((sum, item) => (item ? [...sum, item.trim()] : sum), []);
+    version = versionInfo[0].split(/[v,-]/)[1];
+    console.log(`tesseract version: ${version}`);
+    callback(null);
+  })
+}
+
+const tesseract = function(image, options = {}, callback) {
+  checkTesseractVersion(function(err) {
+    // not find tesseract-ORC
+    if (err) throw err;
+    let imageUri = path.resolve(image);
+    fs.access(imageUri, fs.constants.F_OK, function(err) {
+      // not find image
+      if (err) throw err;
+      let output = path.resolve(tempDirPath, `tesseract-temp-${new Date().getTime()}`);
+
+      let command = ["tesseract", imageUri, output];
+
+      command = [...command,
+        options.l ? `-l ${options.l}` : `-l ${defaultOptions.l}`,
+        options.oem && oems.indexOf(+options.oem) !== -1 ? `--oem ${options.oem}` : (console.log("The OEM you set is out of range."), `--oem ${defaultOptions.oem}`),
+        options.psm && psms.indexOf(+options.psm) !== -1 ? `--psm ${options.psm}` : (console.log("The PSM you set is out of range."), `--psm ${defaultOptions.psm}`)
+      ].join(" ");
+
+      console.log(command);
+
+      exec(command, function(err) {
+        if (err) throw err;
+        let tempFileName = `${output}.txt`;
+        fs.readFile(tempFileName, "utf-8", function(err, data) {
+          if (err) throw err;
+          fs.unlink(tempFileName, function(err) {
+            if (err) throw err;
+            callback(null, data);
+          });
+        });
+      })
+
     })
   })
 }
 
-function checkFileIsExist(file) {
-  return fs.accessSync(file, fs.constants.F_OK)
-}
-
-const tesseract = function(image, options = {}) {
-  return new Promise((resolve, reject) => {
-    checkTesseractVersion().then(res => {
-      let imageUri = path.resolve(image);
-
-      if (!checkFileIsExist(imageUri)) {
-        let output = path.resolve(tempDirPath, `tesseract-temp-${new Date().getTime()}`);
-
-        let commands = ["tesseract", imageUri, output];
-        let command = "";
-
-        options.l ? commands.push(`-l ${options.l}`) : commands.push(`-l ${defaultOptions.l}`);
-
-        if (options.oem) {
-          if (oems.indexOf(+options.oem) === -1) {
-            reject("oem err");
-            return;
-          } else {
-            commands.push(`--oem ${options.oem}`)
-          }
-        } else {
-          commands.push(`--oem ${defaultOptions.oem}`)
-        }
-
-        if (options.psm) {
-          if (psms.indexOf(+options.psm) === -1) {
-            reject("psm err");
-            return;
-          } else {
-            commands.push(`--psm ${options.psm}`)
-          }
-        } else {
-          commands.push(`--psm ${defaultOptions.psm}`)
-        }
-
-        command = commands.join(" ");
-
-        exec(command, function(err) {
-          if (err) {
-            reject(err);
-            return;
-          } else {
-            let file = `${output}.txt`;
-            fs.readFile(file, "utf-8", function(err, data) {
-              if (err) {
-                reject(err);
-                return;
-              } else {
-                fs.unlink(file, function(err) {
-                  if (err) {
-                    reject(err);
-                    return;
-                  } else {
-                    resolve(data);
-                    return;
-                  }
-                });
-              }
-            });
-          }
-        })
-
-      } else {
-        reject("not find file");
-        return;
-      }
-    }).catch(err => {
-      reject(err);
-    });
-  })
-}
-
-tesseract("./test/output.jpg").then(res => {
-  console.log(res);
-}).catch(err => {
-  console.log(err);
+tesseract("./test/output.jpg", {
+  oem: 3,
+  psm: 4
+}, function(err, data) {
+  if (err) console.log(err)
+  console.log(data);
 })
 
 module.exports = tesseract;
