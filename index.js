@@ -5,9 +5,6 @@ const fs = require('fs');
 const path = require('path');
 const tempDirPath = require('os').tmpdir();
 
-let versionInfo = "";
-let version = "";
-
 // Page segmentation modes:
 // 0 --- Orientation and script detection (OSD) only.
 // 1 --- Automatic page segmentation with OSD.
@@ -45,40 +42,52 @@ function checkTesseractVersion(callback) {
       callback(err, null);
       return;
     }
-    versionInfo = stdout.toLowerCase().split(/[\r,\n]/).reduce((sum, item) => (item ? [...sum, item.trim()] : sum), []);
-    version = versionInfo[0].split(/[v,-]/)[1];
-    console.log(`tesseract version: ${version}`);
+    process.versions.tesseracts = stdout.toLowerCase().split(/[\r,\n]/).reduce((sum, item) => (item ? [...sum, item.trim()] : sum), []);
+    process.versions.tesseract = versionInfo[0].split(/[v,-]/)[1];
+    console.log(`tesseract version: ${process.versions.tesseract}`);
     callback(null);
   })
 }
 
-const tesseract = function(image, options = {}, callback) {
+function throwErr(err) {
+  if (err) throw err;
+}
+
+const tesseract = function(image, options, callback) {
   checkTesseractVersion(function(err) {
     // not find tesseract-ORC
-    if (err) throw err;
+    throwErr(err);
     let imageUri = path.resolve(image);
     fs.access(imageUri, fs.constants.F_OK, function(err) {
       // not find image
-      if (err) throw err;
+      throwErr(err);
       let output = path.resolve(tempDirPath, `tesseract-temp-${new Date().getTime()}`);
 
       let command = ["tesseract", imageUri, output];
 
+      if (typeof options === "function") {
+        callback = options;
+        options = {};
+      }
+
       command = [...command,
         options.l ? `-l ${options.l}` : `-l ${defaultOptions.l}`,
-        options.oem && oems.indexOf(+options.oem) !== -1 ? `--oem ${options.oem}` : (console.log("The OEM you set is out of range."), `--oem ${defaultOptions.oem}`),
-        options.psm && psms.indexOf(+options.psm) !== -1 ? `--psm ${options.psm}` : (console.log("The PSM you set is out of range."), `--psm ${defaultOptions.psm}`)
+        options.oem && oems.indexOf(+options.oem) !== -1 ? `--oem ${options.oem}` : (console.log("The oem you set is out of range or set err, use default."), `--oem ${defaultOptions.oem}`),
+        options.psm && psms.indexOf(+options.psm) !== -1 ? `--psm ${options.psm}` : (console.log("The psm you set is out of range or set err, use default."), `--psm ${defaultOptions.psm}`)
       ].join(" ");
 
       console.log(command);
 
       exec(command, function(err) {
-        if (err) throw err;
+        // command err
+        throwErr(err);
         let tempFileName = `${output}.txt`;
         fs.readFile(tempFileName, "utf-8", function(err, data) {
-          if (err) throw err;
+          // not find tempfile
+          throwErr(err);
           fs.unlink(tempFileName, function(err) {
-            if (err) throw err;
+            // not find tempfile
+            throwErr(err);
             callback(null, data);
           });
         });
@@ -87,13 +96,5 @@ const tesseract = function(image, options = {}, callback) {
     })
   })
 }
-
-tesseract("./test/output.jpg", {
-  oem: 3,
-  psm: 4
-}, function(err, data) {
-  if (err) console.log(err)
-  console.log(data);
-})
 
 module.exports = tesseract;
