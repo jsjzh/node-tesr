@@ -137,7 +137,4 @@ tesseract("./test/output.jpg").then(res => {
   console.log(err);
 })
 
-// c:\Users\King\Desktop\SELF\code\node\output.jpg
-// C:\Users\King\AppData\Local\Temp\node-tesseract-eda28151-cc91-4717-a706-99942755fcfd
-
 module.exports = tesseract;
