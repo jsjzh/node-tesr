@@ -1,6 +1,6 @@
 {
   "name": "node-middleware-tesseract",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "node with tesseract",
   "repository": {
     "type": "git",
