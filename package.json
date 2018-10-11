@@ -9,7 +9,8 @@
   "keywords": [
     "tesseract",
     "node",
-    "ocr"
+    "ocr",
+    "middleware"
   ],
   "author": "jsjzh",
   "license": "MIT",
