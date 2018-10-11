@@ -4,6 +4,7 @@ const { exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const tempDirPath = require('os').tmpdir();
+const versions = process.versions;
 
 // Page segmentation modes:
 // 0 --- Orientation and script detection (OSD) only.
@@ -29,35 +30,31 @@ const psms = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 // 3 --- Default, based on what is available.
 const oems = [0, 1, 2, 3];
 
-const defaultOptions = {
-  l: "eng",
-  psm: psms[3],
-  oem: oems[3]
-}
+// language
+// https://github.com/tesseract-ocr/tessdata
+const l = "eng";
+
+const defaultOptions = { l, psm: psms[3], oem: oems[3] }
+function throwErr(err) { if (err) throw err }
 
 function checkTesseractVersion(callback) {
   exec("tesseract --version", function(err, stdout) {
-    if (err) {
-      console.log("Please check if you have installed tesseract-ORC && Set the environment variables correctly.");
-      callback(err, null);
-      return;
-    }
-    process.versions.tesseracts = stdout.toLowerCase().split(/[\r,\n]/).reduce((sum, item) => (item ? [...sum, item.trim()] : sum), []);
-    process.versions.tesseract = process.versions.tesseracts[0].split(/[v,-]/)[1];
-    console.log(`tesseract version: ${process.versions.tesseract}`);
-    callback(null);
+    if (err) throwErr("Please check if you have installed tesseract-ORC && Set the environment variables correctly.");
+    versions.tesseracts = stdout.toLowerCase().split(/[\r,\n]/).reduce((sum, item) => (item ? [...sum, item.trim()] : sum), []);
+    versions.tesseract = versions.tesseracts[0].split(/[v,-]/)[1];
+    console.log(`tesseract version: ${versions.tesseract}`);
+    callback(true);
   })
 }
 
-function throwErr(err) {
-  if (err) throw err;
-}
-
 const tesseract = function(image, options, callback) {
-  checkTesseractVersion(function(err) {
-    // not find tesseract-ORC
-    throwErr(err);
+  checkTesseractVersion(function(flag) {
+
+    if (!image) throwErr("can not find image");
+    if (typeof options !== "function" && typeof callback !== "function") throwErr("callback is undefined");
+
     let imageUri = path.resolve(image);
+
     fs.access(imageUri, fs.constants.F_OK, function(err) {
       // not find image
       throwErr(err);
@@ -90,10 +87,13 @@ const tesseract = function(image, options, callback) {
             throwErr(err);
             callback(null, data);
           });
+
         });
+
       })
 
     })
+
   })
 }
 
