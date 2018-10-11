@@ -15,7 +15,7 @@
 
 [tessdata 下载地址](https://github.com/tesseract-ocr/tessdata "语言包下载")
 
-语言包下载完成之后，将下载好的 `.traineddata` 文件放入 `...\Program Files (x86)\Tesseract-OCR\tessdata` 内即可生效。
+语言包下载完成之后，将下载好的 `.traineddata` 文件放入 `...\Program Files (x86)\Tesseract-OCR\tessdata` 内即可。
 
 ## 使用
 
@@ -28,6 +28,7 @@ npm install node-middleware-tesseract
 const tesseract = require("node-middleware-tesseract");
 
 tesseract("./output.png", {
+  // 若要使用其他请务必先下载对应的语言包并放置正确位置
   l: "eng",
   oem: 3,
   psm: 3
