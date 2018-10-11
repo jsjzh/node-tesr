@@ -1,5 +1,5 @@
 {
-  "name": "middleware-tesseract",
+  "name": "node-middleware-tesseract",
   "version": "0.0.1",
   "description": "node with tesseract",
   "repository": {
