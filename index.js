@@ -43,7 +43,7 @@ function checkTesseractVersion(callback) {
       return;
     }
     process.versions.tesseracts = stdout.toLowerCase().split(/[\r,\n]/).reduce((sum, item) => (item ? [...sum, item.trim()] : sum), []);
-    process.versions.tesseract = versionInfo[0].split(/[v,-]/)[1];
+    process.versions.tesseract = process.versions.tesseracts[0].split(/[v,-]/)[1];
     console.log(`tesseract version: ${process.versions.tesseract}`);
     callback(null);
   })
