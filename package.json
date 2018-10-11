@@ -1,0 +1,20 @@
+{
+  "name": "middleware-tesseract",
+  "version": "0.0.1",
+  "description": "node with tesseract",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsjzh/node-middleware-tesseract.git"
+  },
+  "keywords": [
+    "tesseract",
+    "node",
+    "ocr"
+  ],
+  "author": "jsjzh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jsjzh/node-middleware-tesseract/issues"
+  },
+  "homepage": "https://github.com/jsjzh/node-middleware-tesseract#readme"
+}
