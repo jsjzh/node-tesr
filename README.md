@@ -175,3 +175,6 @@ const oems = [0, 1, 2, 3];
 // yid --- Yiddish(意第绪语)
 const l = "eng";
 ```
+
+## 其他
+[识别算法学习](https://blog.csdn.net/xiaojun111111/article/details/54377154)
