@@ -19,7 +19,6 @@
 
 ## 使用
 
-install
 ```
 npm install node-middleware-tesseract
 ```
