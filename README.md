@@ -17,6 +17,9 @@
 
 语言包下载完成之后，将下载好的 `.traineddata` 文件放入 `...\Program Files (x86)\Tesseract-OCR\tessdata` 内即可。
 
+## 如何提高图像识别准确率
+[识别算法学习](https://blog.csdn.net/xiaojun111111/article/details/54377154)
+
 ## 使用
 
 ```
@@ -175,6 +178,3 @@ const oems = [0, 1, 2, 3];
 // yid --- Yiddish(意第绪语)
 const l = "eng";
 ```
-
-## 如何提高图像识别准确率
-[识别算法学习](https://blog.csdn.net/xiaojun111111/article/details/54377154)
