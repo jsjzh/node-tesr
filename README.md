@@ -4,7 +4,7 @@
 
 配合 tesseract-OCR 食用的 node 中间件，支持 tesseract-OCR 最新的版本（v4.0.0-rc2.20181008）。
 
-使用该中间件前，请确保电脑中已经安装了 tesseract-OCR，并且在环境变量中配置好了对应的 path。
+使用该中间件前，请确保电脑中已经安装了 tesseract-OCR，window 系统在系统环境变量中配置好了 tesseract 对应的 path。
 
 ### tesseract 下载地址（必要）
 [tesseract 下载地址](https://github.com/tesseract-ocr/tesseract/wiki/Downloads "tesseract 下载")
@@ -176,5 +176,5 @@ const oems = [0, 1, 2, 3];
 const l = "eng";
 ```
 
-## 其他
+## 如何提高图像识别准确率
 [识别算法学习](https://blog.csdn.net/xiaojun111111/article/details/54377154)
