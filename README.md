@@ -7,17 +7,19 @@
 使用该中间件前，请确保电脑中已经安装了 tesseract-OCR，window 系统在系统环境变量中配置好了 tesseract 对应的 path。
 
 ### tesseract 下载地址（必要）
-[tesseract 下载地址](https://github.com/tesseract-ocr/tesseract/wiki/Downloads "tesseract 下载")
 
-[安装教程](https://jingyan.baidu.com/article/219f4bf788addfde442d38fe.html "安装教程")
+[tesseract 下载地址](https://github.com/tesseract-ocr/tesseract/wiki/Downloads 'tesseract 下载')
+
+[安装教程](https://jingyan.baidu.com/article/219f4bf788addfde442d38fe.html '安装教程')
 
 ### tessdata 下载地址（可选择所需的语言包下载）
 
-[tessdata 下载地址](https://github.com/tesseract-ocr/tessdata "语言包下载")
+[tessdata 下载地址](https://github.com/tesseract-ocr/tessdata '语言包下载')
 
 语言包下载完成之后，将下载好的 `.traineddata` 文件放入 `...\Program Files (x86)\Tesseract-OCR\tessdata` 内即可。
 
 ## 如何提高图像识别准确率
+
 [识别算法学习](https://blog.csdn.net/xiaojun111111/article/details/54377154)
 
 ## 使用
@@ -27,21 +29,26 @@ npm install node-middleware-tesseract
 ```
 
 ```javascript
-const tesseract = require("node-middleware-tesseract");
+const tesseract = require('node-middleware-tesseract')
 
-tesseract("./output.png", {
-  // 若要使用其他请务必先下载对应的语言包并放置正确位置
-  l: "eng",
-  oem: 3,
-  psm: 3
-}, function(err, data) {
-  if (err) throw err;
-  // 输出识别的文字
-  console.log(data);
-})
+tesseract(
+  './output.png',
+  {
+    // 若要使用其他请务必先下载对应的语言包并放置正确位置
+    l: 'eng',
+    oem: 3,
+    psm: 3
+  },
+  function(err, data) {
+    if (err) throw err
+    // 输出识别的文字
+    console.log(data)
+  }
+)
 ```
 
 ### 配置相关
+
 ```javascript
 // Page segmentation modes:
 // 0 --- Orientation and script detection (OSD) only.
@@ -58,14 +65,14 @@ tesseract("./output.png", {
 // 11 --- Sparse text. Find as much text as possible in no particular order.
 // 12 --- Sparse text with OSD.
 // 13 --- Raw line. Treat the image as a single text line, bypassing hacks that are Tesseract-specific.
-const psms = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+const psms = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 
 // OCR Engine modes:
 // 0 --- Legacy engine only.
 // 1 --- Neural nets LSTM engine only.
 // 2 --- Legacy + LSTM engines.
 // 3 --- Default, based on what is available.
-const oems = [0, 1, 2, 3];
+const oems = [0, 1, 2, 3]
 
 // language:
 // https://github.com/tesseract-ocr/tessdata
@@ -176,5 +183,10 @@ const oems = [0, 1, 2, 3];
 // uzb_cyrl --- Uzbek - Cyrilic(乌兹别克斯坦- Cyrilic)
 // vie --- Vietnamese(越南语)
 // yid --- Yiddish(意第绪语)
-const l = "eng";
+const l = 'eng'
 ```
+
+## 待办
+
+- 加入网络图片可以识别
+- 加入 `then` 异步

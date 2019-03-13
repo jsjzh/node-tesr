@@ -7,7 +7,7 @@
     "url": "git+https://github.com/jsjzh/node-middleware-tesseract.git"
   },
   "bin": {
-    "nodeOCR": "./node-middleware-tesseract.js"
+    "node-orc": "./node-middleware-tesseract.js"
   },
   "keywords": [
     "tesseract",
