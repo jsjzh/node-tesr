@@ -1,2 +1,5 @@
 node_modules
 .jsbeautifyrc
+
+yarn.lock
+package-lock.json
