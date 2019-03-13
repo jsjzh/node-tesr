@@ -1,26 +1,26 @@
 {
-  "name": "node-middleware-tesseract",
+  "name": "node-tesseract-ocr",
   "version": "0.0.5",
   "description": "node with tesseract",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jsjzh/node-middleware-tesseract.git"
+    "url": "git+https://github.com/jsjzh/node-tesseract-ocr.git"
   },
   "bin": {
-    "nodeOCR": "./node-middleware-tesseract.js"
+    "nodeOCR": "./node-tesseract-ocr.js"
   },
   "keywords": [
     "tesseract",
     "node",
     "ocr",
-    "middleware"
+    "图像识别"
   ],
-  "author": "jsjzh",
+  "author": "jsjzh <kimimi_king@163.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jsjzh/node-middleware-tesseract/issues"
+    "url": "https://github.com/jsjzh/node-tesseract-ocr/issues"
   },
-  "homepage": "https://github.com/jsjzh/node-middleware-tesseract#readme",
+  "homepage": "https://github.com/jsjzh/node-tesseract-ocr#readme",
   "dependencies": {
     "yargs": "^13.2.2"
   }

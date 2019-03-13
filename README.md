@@ -1,22 +1,26 @@
-# node-middleware-tesseract
+# node-tesseract-ocr
 
 ## 说明
 
-配合 tesseract-OCR 食用的 node 中间件，支持 tesseract-OCR 的版本（v4.0.0-rc2.20181008）。
+配合 `tesseract-OCR` 食用的 `node` 插件，支持命令行使用。
 
-使用该中间件前，请确保电脑中已经安装了 tesseract-OCR，window 系统在系统环境变量中配置好了 tesseract 对应的 path。
+使用该插件之前请确保已经安装了 `tesseract-OCR`，`windows` 系统的用户需要配置系统环境变量。
+
+`tesseract-OCR` 支持 `20+` 种语言，若想识别较偏门的语言则需要下载 `tessdata` 语言包。
 
 ### tesseract 下载地址（必要）
 
-[tesseract 下载地址](https://github.com/tesseract-ocr/tesseract/wiki/Downloads 'tesseract 下载')
+[tesseract download](https://github.com/tesseract-ocr/tesseract/wiki/Downloads)
 
-[安装教程](https://jingyan.baidu.com/article/219f4bf788addfde442d38fe.html '安装教程')
+[setup](https://jingyan.baidu.com/article/219f4bf788addfde442d38fe.html)
 
-### tessdata 下载地址（可选择所需的语言包下载）
+### tessdata 下载地址（非必要）
 
-[tessdata 下载地址](https://github.com/tesseract-ocr/tessdata '语言包下载')
+[tessdata download](https://github.com/tesseract-ocr/tessdata)
 
-语言包下载完成之后，将下载好的 `.traineddata` 文件放入 `...\Program Files (x86)\Tesseract-OCR\tessdata` 内即可。
+语言包下载完毕之后，需要将其放入 `tesseract-OCR` 的文件夹下。
+
+例如 windows 环境下只需要将 `xxx.traineddata` 放入 `Tesseract-OCR\tessdata` 即可。
 
 ## 如何提高图像识别准确率
 
@@ -25,11 +29,11 @@
 ## 使用
 
 ```
-npm install node-middleware-tesseract
+npm install node-tesseract-ocr
 ```
 
 ```javascript
-const tesseract = require('node-middleware-tesseract')
+const tesseract = require('node-tesseract-ocr')
 
 tesseract(
   './output.png',
