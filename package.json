@@ -1,13 +1,13 @@
 {
   "name": "node-middleware-tesseract",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "node with tesseract",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jsjzh/node-middleware-tesseract.git"
   },
   "bin": {
-    "node-orc": "./node-middleware-tesseract.js"
+    "nodeOCR": "./node-middleware-tesseract.js"
   },
   "keywords": [
     "tesseract",
