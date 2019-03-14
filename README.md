@@ -57,8 +57,8 @@ tesr --from=./test/output.jpg --to=./output.txt
 ```
 --from 需要识别的图片路径
 --to 若传入此参数会将识别的文字输出到该文件下
---l 识别语言
---p 见 lib/config.js 里的说明，对中文稍微做了点处理，识别简体 --p=chs，识别繁体 --p=cht
+--l 识别语言，对中文稍微做了点处理，识别简体 --l=chs，识别繁体 --l=cht
+--p 见 lib/config.js 里的说明
 --o 见 lib/config.js 里的说明
 ```
 
