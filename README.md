@@ -10,9 +10,17 @@
 
 ## 演示
 
-```
-// TODO
-```
+### 命令行使用 --- 1
+
+![demo.jpg](https://i.loli.net/2019/03/14/5c89b9278d9d5.jpg)
+
+### 命令行使用 --- 2
+
+![demo.jpg](https://i.loli.net/2019/03/14/5c89b9296e4d5.jpg)
+
+### 模块使用 --- 1
+
+![demo.jpg](https://i.loli.net/2019/03/14/5c89b927b22a5.jpg)
 
 ## 前置条件
 
