@@ -1,4 +1,4 @@
-# node-tesseract-ocr
+# node-tesr
 
 ## 说明
 
@@ -34,10 +34,10 @@
 
 ### 命令行使用
 
-命令行使用一般会将 `node-tesseract-ocr` 安装在全局下。
+命令行使用一般会将 `node-tesr` 安装在全局下。
 
 ```cmd
-npm install node-tesseract-ocr -g
+npm install node-tesr -g
 ```
 
 ```cmd
@@ -57,11 +57,11 @@ nodeOCR --from=./test/output.jpg --to=./output.txt
 ### 模块引入使用
 
 ```cmd
-npm install node-tesseract-ocr
+npm install node-tesr
 ```
 
 ```javascript
-const tesseract = require('node-tesseract-ocr')
+const tesseract = require('node-tesr')
 
 tesseract('./output.jpg', { l: 'eng', oem: 3, psm: 3 }, function(err, data) {
   // 此处获得识别内容

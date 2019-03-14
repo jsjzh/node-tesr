@@ -1,13 +1,13 @@
 {
-  "name": "node-tesseract-ocr",
-  "version": "0.0.5",
+  "name": "node-tesr",
+  "version": "0.0.6",
   "description": "node with tesseract",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jsjzh/node-tesseract-ocr.git"
+    "url": "git+https://github.com/jsjzh/node-tesr.git"
   },
   "bin": {
-    "nodeOCR": "./node-tesseract-ocr.js"
+    "tesr": "./node-tesr.js"
   },
   "keywords": [
     "tesseract",
@@ -18,9 +18,9 @@
   "author": "jsjzh <kimimi_king@163.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jsjzh/node-tesseract-ocr/issues"
+    "url": "https://github.com/jsjzh/node-tesr/issues"
   },
-  "homepage": "https://github.com/jsjzh/node-tesseract-ocr#readme",
+  "homepage": "https://github.com/jsjzh/node-tesr#readme",
   "dependencies": {
     "yargs": "^13.2.2"
   }
