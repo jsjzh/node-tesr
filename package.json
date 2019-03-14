@@ -1,6 +1,6 @@
 {
   "name": "node-tesr",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "node with tesseract",
   "repository": {
     "type": "git",
