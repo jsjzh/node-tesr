@@ -49,7 +49,7 @@ npm install node-tesr -g
 ```
 
 ```cmd
-nodeOCR --from=./test/output.jpg --to=./output.txt
+tesr --from=./test/output.jpg --to=./output.txt
 ```
 
 参数说明
