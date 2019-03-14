@@ -69,15 +69,15 @@ npm install node-tesr
 ```
 
 ```javascript
-const tesseract = require('node-tesr')
+const tesr = require('node-tesr')
 
-tesseract('./output.jpg', { l: 'eng', oem: 3, psm: 3 }, function(err, data) {
+tesr('./output.jpg', { l: 'eng', oem: 3, psm: 3 }, function(err, data) {
   // 此处获得识别内容
   console.log(data)
 })
 
 // 或者如下也可
-tesseract('./output.jpg', function(err, data) {
+tesr('./output.jpg', function(err, data) {
   // 此处获得识别内容
   console.log(data)
 })
@@ -90,11 +90,6 @@ tesseract('./output.jpg', function(err, data) {
 来，看这里，这个可以提高图像识别率。
 
 [识别算法学习](https://blog.csdn.net/xiaojun111111/article/details/54377154)
-
-## 待办
-
-- 增加网络地址图片也可识别的功能
-- 使用 `then` 来处理回调
 
 ## 配置相关
 
